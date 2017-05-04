@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+
+  redis:
+    restart: always
+    image: redis:3.2.6
+    hostname: redis
+
+  db:
+    restart: always
+    image: postgres:9.6.1
+    hostname: db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  web:
+    restart: always
+    build: ./django
+    hostname: web
+    command: bash -c "./manage.py migrate && ./manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ../src:/opt/src
+    ports:
+      - "8000:8000"
+    links:
+      - db
+      - redis
+    depends_on:
+      - db
+
+  celery:
+    restart: always
+    build: ./django
+    command: su -m docker -c "celery -A celeryconf:app worker -B --loglevel=INFO"
+    volumes:
+      - ../src:/opt/src
+    links:
+      - db
+      - redis
+    depends_on:
+      - redis
