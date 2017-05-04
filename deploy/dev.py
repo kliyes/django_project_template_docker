@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import os
 
 from fabric.api import local, settings
-from fabric.colors import yellow, cyan, white
+from fabric.colors import yellow, cyan, green
 from fabric.context_managers import lcd, prefix, hide
 from fabric.contrib.console import confirm
 from fabric.utils import puts
@@ -19,8 +19,6 @@ DOCKER_DIR = os.path.join(PROJECT_DIR, "docker")
 def start_machine():
     """
     检查machine状态并启动
-
-    :param use_mirror: 是否使用国内镜像进行加速
     """
     with settings(warn_only=True):
         machine_status = local("docker-machine status {}".format(MACHINE_NAME),
@@ -75,14 +73,14 @@ def welcome():
     with hide("running"):
         machine_ip = local("docker-machine ip {}".format(MACHINE_NAME), capture=True)
 
-    puts(cyan("Already started a development server at http://{}:8000".format(machine_ip)))
-    puts(cyan("Please active the machine environment before run any docker-compose command:"))
-    puts(white("    1. Change dir to '../docker'"))
-    puts(white("    2. Execute: eval $(docker-machine env {})".format(MACHINE_NAME)))
-    puts(cyan("Also, run django manage commands via:"))
-    puts(white("    docker-compose run --rm web python manage.py [COMMAND]"))
-    puts(cyan("Tail the runserver logs use:"))
-    puts(white("    docker-compose logs -ft web"))
+    puts(green("Already started a development server at http://{}:8000".format(machine_ip)))
+    puts(green("Please active the machine environment before run any docker-compose command:"))
+    puts(cyan("    1. Change dir to '../docker'"))
+    puts(cyan("    2. Execute: eval $(docker-machine env {})".format(MACHINE_NAME)))
+    puts(green("Also, run django manage commands via:"))
+    puts(cyan("    docker-compose run --rm web python manage.py [COMMAND]"))
+    puts(green("Tail the runserver logs use:"))
+    puts(cyan("    docker-compose logs -ft web"))
 
 
 def start_develop():
