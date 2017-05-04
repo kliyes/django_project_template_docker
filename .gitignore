@@ -98,3 +98,7 @@ ENV/
 
 # Project related
 .idea
+db.sqlite3
+src/settings/__init__.py
+src/settings/dev.py
+deploy/*.tar.gz
