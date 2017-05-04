@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 
-def field(label, **kwargs):
+def field(label=None, **kwargs):
     """
     A decorator of admin callable-field
     Usage:
@@ -18,7 +18,8 @@ def field(label, **kwargs):
     :return: 
     """
     def inner(func):
-        func.short_description = label
+        if label:
+            func.short_description = label
         [setattr(func, key, value) for key, value in kwargs.iteritems()]
         return func
     return inner
