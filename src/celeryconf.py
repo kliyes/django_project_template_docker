@@ -9,7 +9,7 @@ from celery import Celery
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 
-app = Celery(os.path.basename(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+app = Celery()
 
 CELERY_TIMEZONE = settings.TIME_ZONE
 
