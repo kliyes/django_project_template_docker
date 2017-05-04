@@ -11,7 +11,7 @@ from fabric.utils import puts
 
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MACHINE_NAME = os.path.basename(PROJECT_DIR)
+MACHINE_NAME = os.path.basename(PROJECT_DIR).replace("_", "-")  # allowed machine name chars: 0-9a-zA-Z . -
 SETTINGS_DIR = os.path.join(PROJECT_DIR, "src/settings")
 DOCKER_DIR = os.path.join(PROJECT_DIR, "docker")
 
@@ -26,7 +26,7 @@ def start_machine():
         machine_status = local("docker-machine status {}".format(MACHINE_NAME),
                                capture=True)
     if "Host does not exist" in machine_status.stderr:
-        creation_cmd = """docker-machine create {} -d virtualbox"""
+        creation_cmd = "docker-machine create {} -d virtualbox".format(MACHINE_NAME)
         puts(yellow("Machine does not exist, creating a new one..."))
         if confirm("Use another mirror to speed up pulling images?"):
             creation_cmd += " --engine-registry-mirror=https://avyczztf.mirror.aliyuncs.com"
