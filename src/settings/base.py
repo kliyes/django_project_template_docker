@@ -154,3 +154,4 @@ TIME_FORMAT = "H:i:s"
 DATETIME_FORMAT = DATE_FORMAT + " " + TIME_FORMAT
 
 # import other settings below
+from .celery import *
