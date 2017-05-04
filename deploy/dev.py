@@ -74,6 +74,7 @@ def welcome():
         machine_ip = local("docker-machine ip {}".format(MACHINE_NAME), capture=True)
 
     puts(green("Already started a development server at http://{}:8000".format(machine_ip)))
+    puts(green("Default superuser created: admin/admin"))
     puts(green("Please active the machine environment before run any docker-compose command:"))
     puts(cyan("    1. Change dir to '../docker'"))
     puts(cyan("    2. Execute: eval $(docker-machine env {})".format(MACHINE_NAME)))
