@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import uuid
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 
 class BaseModel(models.Model):
@@ -16,7 +16,7 @@ class BaseModel(models.Model):
 
 
 class UUIDPkBaseModel(BaseModel):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(_("Primary Key"), primary_key=True, default=uuid.uuid4, editable=False)
 
     class Meta:
         abstract = True
