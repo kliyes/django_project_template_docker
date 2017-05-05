@@ -32,6 +32,11 @@ services:
       - redis
     depends_on:
       - db
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "20"
 
   celery:
     restart: always

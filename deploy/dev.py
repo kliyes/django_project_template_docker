@@ -7,6 +7,7 @@ from fabric.api import local, settings
 from fabric.colors import yellow, cyan, green
 from fabric.context_managers import lcd, prefix, hide
 from fabric.contrib.console import confirm
+from fabric.operations import prompt
 from fabric.utils import puts
 
 
@@ -29,6 +30,10 @@ def start_machine():
         if confirm("Use another mirror to speed up pulling images?"):
             creation_cmd += " --engine-registry-mirror=https://avyczztf.mirror.aliyuncs.com"
         local(creation_cmd)
+        if confirm("Enable port forwarding?"):
+            host_port = prompt("Specify host port: [8000]", default="8000")
+            port_forwarding_cmd = "VBoxManage controlvm '{}' natpf1 'web,tcp,,{},,8000'".format(MACHINE_NAME, host_port)
+            local(port_forwarding_cmd)
     elif not machine_status == "Running":
         local("docker-machine start {}".format(MACHINE_NAME))
 
