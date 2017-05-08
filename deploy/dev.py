@@ -31,7 +31,7 @@ def start_machine():
             creation_cmd += " --engine-registry-mirror=https://avyczztf.mirror.aliyuncs.com"
         local(creation_cmd)
         if confirm("Enable port forwarding?"):
-            host_port = prompt("Specify host port: [8000]", default="8000")
+            host_port = prompt("Specify host port:", default="8000")
             port_forwarding_cmd = "VBoxManage controlvm '{}' natpf1 'web,tcp,,{},,8000'".format(MACHINE_NAME, host_port)
             local(port_forwarding_cmd)
     elif not machine_status == "Running":
