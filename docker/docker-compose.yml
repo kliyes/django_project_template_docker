@@ -25,6 +25,8 @@ services:
     command: bash -c "./manage.py migrate && ./manage.py runserver_plus 0.0.0.0:8000"
     volumes:
       - ../src:/opt/src
+      - /data/static:/opt/static
+      - /data/media:/opt/media
     ports:
       - "8000:8000"
     links:

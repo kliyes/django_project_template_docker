@@ -4,10 +4,6 @@ services:
 
   web:
     command: bash -c "./manage.py collectstatic --noinput && ./manage.py migrate && uwsgi --ini uwsgi.ini"
-    volumes:
-      - ../src:/opt/src
-      - /data/static:/opt/static
-      - /data/media:/opt/media
 
   nginx:
     restart: always
