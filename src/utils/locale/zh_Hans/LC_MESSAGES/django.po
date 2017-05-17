@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-05 09:31+0800\n"
+"POT-Creation-Date: 2017-05-17 14:33+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:11
+#: models.py:13
 msgid "Created At"
 msgstr "创建时间"
 
-#: models.py:12
+#: models.py:14
 msgid "Updated At"
 msgstr "更新时间"
 
-#: models.py:19
+#: models.py:23
 msgid "Primary Key"
 msgstr "主键"
+
+#####################################
+# Override django/contrib/admin/locale/zh_Hans/LC_MESSAGES/django.po
+# For fixing typo or whatever
+#####################################
+msgid "Added {name} \"{object}\"."
+msgstr "已添加{name}\"{object}\"。"

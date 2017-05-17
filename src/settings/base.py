@@ -139,6 +139,9 @@ TIME_ZONE = 'Asia/Shanghai'
 
 USE_TZ = True
 
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, "utils", "locale")
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/{{ docs_version }}/howto/static-files/

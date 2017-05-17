@@ -1,0 +1,13 @@
+#####################################
+# Override django/contrib/admin/locale/zh_Hans/LC_MESSAGES/djangojs.po
+# For fixing typo or whatever
+#####################################
+
+msgid "Remove all"
+msgstr "全不选"
+
+msgid "Remove"
+msgstr "移除"
+
+msgid "Click to remove all chosen %s at once."
+msgstr "移除所有选择的%s。"
