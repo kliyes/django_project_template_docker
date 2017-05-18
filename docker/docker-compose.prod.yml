@@ -13,7 +13,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - /data/static:/opt/static
-      - /data/media:/opt/media
+      - staticdata:/opt/static
+      - mediadata:/opt/media
     links:
       - web

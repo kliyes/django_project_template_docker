@@ -6,17 +6,17 @@ services:
     restart: always
     image: redis:3.2.6
     hostname: redis
+    volumes:
+      - redisdata:/data
 
   db:
     restart: always
     image: postgres:9.6.1
     hostname: db
+    volumes:
+      - dbdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
 
   web:
     restart: always
@@ -25,8 +25,8 @@ services:
     command: bash -c "./manage.py migrate && ./manage.py runserver_plus 0.0.0.0:8000"
     volumes:
       - ../src:/opt/src
-      - /data/static:/opt/static
-      - /data/media:/opt/media
+      - staticdata:/opt/static
+      - mediadata:/opt/media
     ports:
       - "8000:8000"
     links:
@@ -51,3 +51,9 @@ services:
       - redis
     depends_on:
       - redis
+
+volumes:
+  redisdata:
+  dbdata:
+  mediadata:
+  staticdata:

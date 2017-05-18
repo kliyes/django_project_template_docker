@@ -12,7 +12,8 @@ from fabric.utils import puts
 
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MACHINE_NAME = os.path.basename(PROJECT_DIR).replace("_", "-")  # allowed machine name chars: 0-9a-zA-Z . -
+PROJECT_NAME = os.path.basename(PROJECT_DIR)
+MACHINE_NAME = PROJECT_NAME.replace("_", "-")  # allowed machine name chars: 0-9a-zA-Z . -
 SETTINGS_DIR = os.path.join(PROJECT_DIR, "src/settings")
 DOCKER_DIR = os.path.join(PROJECT_DIR, "docker")
 
