@@ -18,7 +18,7 @@ def field(label=None, **kwargs):
     :return: 
     """
     def inner(func):
-        if label:
+        if label is not None:
             func.short_description = label
         [setattr(func, key, value) for key, value in kwargs.iteritems()]
         return func

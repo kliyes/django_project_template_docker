@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-17 14:33+0800\n"
+"POT-Creation-Date: 2017-05-19 08:49+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,4 +34,17 @@ msgstr "主键"
 # For fixing typo or whatever
 #####################################
 msgid "Added {name} \"{object}\"."
-msgstr "已添加{name}\"{object}\"。"
+msgstr "添加了{name}\"{object}\"。"
+
+msgid ""
+"Are you sure you want to delete the selected %(objects_name)s? All of the "
+"following objects and their related items will be deleted:"
+msgstr ""
+"请确认要删除选中的 %(objects_name)s 吗？以下所有对象和与它们相关的条目都将会"
+"被删除："
+
+msgid "We're sorry, but the requested page could not be found."
+msgstr "很抱歉，请求页面无法找到。"
+
+msgid "Add another %(verbose_name)s"
+msgstr "新增 %(verbose_name)s"

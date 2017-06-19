@@ -40,3 +40,12 @@ def plaintext2html(text, tabstop=4):
                 last = '<br>'
             return "%s<a target='_blank' href='%s'>%s</a>%s" % (prefix, url, url, last)
     return re.sub(re_string, do_sub, text)
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip

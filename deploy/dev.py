@@ -64,9 +64,7 @@ def start_service():
     启动docker服务
     """
     with lcd(DOCKER_DIR):
-        up_cmd = "docker-compose up -d --remove-orphans"
-        if confirm("Rebuild all docker images?"):
-            up_cmd += " --build"
+        up_cmd = "docker-compose up -d --remove-orphans --build"
         with prefix("eval $(docker-machine env {})".format(MACHINE_NAME)):
             local("docker-compose stop")
             local(up_cmd)

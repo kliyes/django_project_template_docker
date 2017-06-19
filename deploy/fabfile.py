@@ -76,9 +76,7 @@ def start_service():
     with cd(DOCKER_DIR):
         docker_file_args = "-f docker-compose.yml -f docker-compose.prod.yml"
         run("docker-compose {} stop".format(docker_file_args))
-        up_cmd = """docker-compose {} up -d --remove-orphans""".format(docker_file_args)
-        if confirm("Rebuild all docker images?"):
-            up_cmd += " --build"
+        up_cmd = """docker-compose {} up -d --remove-orphans --build""".format(docker_file_args)
         run(up_cmd)
 
 
