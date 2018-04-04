@@ -83,7 +83,7 @@ def welcome():
     puts(cyan("    1. Change dir to '../docker'"))
     puts(cyan("    2. Execute: eval $(docker-machine env {})".format(MACHINE_NAME)))
     puts(green("Also, run django manage commands via:"))
-    puts(cyan("    docker-compose run --rm web python manage.py [COMMAND]"))
+    puts(cyan("    docker-compose exec web python manage.py [COMMAND]"))
     puts(green("Tail the runserver logs use:"))
     puts(cyan("    docker-compose logs -ft web"))
 
