@@ -25,7 +25,7 @@ def start_machine():
     with settings(warn_only=True):
         machine_status = local("docker-machine status {}".format(MACHINE_NAME),
                                capture=True)
-    if "Host does not exist" in machine_status.stderr:
+    if "does not exist" in machine_status.stderr:
         creation_cmd = "docker-machine create {} -d virtualbox".format(MACHINE_NAME)
         puts(yellow("Machine does not exist, creating a new one..."))
         if confirm("Use another mirror to speed up pulling images?"):
