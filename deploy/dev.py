@@ -16,6 +16,10 @@ PROJECT_NAME = os.path.basename(PROJECT_DIR)
 MACHINE_NAME = PROJECT_NAME.replace("_", "-")  # allowed machine name chars: 0-9a-zA-Z . -
 SETTINGS_DIR = os.path.join(PROJECT_DIR, "src/settings")
 DOCKER_DIR = os.path.join(PROJECT_DIR, "docker")
+REGISTRY_MIRROR = "https://avyczztf.mirror.aliyuncs.com"
+BOOT2DOCKER_REPO = "https://github.com/boot2docker/boot2docker"
+CACHED_BOOT2DOCKER = "~/.docker/machine/cache/boot2docker.iso"
+BOOT2DOCKER_LEGACY_VERSION = "v17.05.0-ce"
 
 
 def start_machine():
@@ -26,10 +30,25 @@ def start_machine():
         machine_status = local("docker-machine status {}".format(MACHINE_NAME),
                                capture=True)
     if "does not exist" in machine_status.stderr:
-        creation_cmd = "docker-machine create {} -d virtualbox".format(MACHINE_NAME)
+        creation_cmd = "docker-machine create {}".format(MACHINE_NAME)
         puts(yellow("Machine does not exist, creating a new one..."))
-        if confirm("Use another mirror to speed up pulling images?"):
-            creation_cmd += " --engine-registry-mirror=https://avyczztf.mirror.aliyuncs.com"
+        if confirm("Specify registry mirror for speeding up pull images?"):
+            creation_cmd += " --engine-registry-mirror {}".format(REGISTRY_MIRROR)
+        if confirm("Use legacy: {} boot2docker image?".format(BOOT2DOCKER_LEGACY_VERSION)):
+            boot2docker_version = BOOT2DOCKER_LEGACY_VERSION
+        else:
+            with settings(warn_only=True):
+                # check latest release version
+                # ref: https://realguess.net/2016/07/18/getting-the-version-of-the-latest-release/
+                boot2docker_version = local(
+                    "curl -sI {}/releases/latest | grep ^Location | cut -d / -f 8".format(BOOT2DOCKER_REPO),
+                    capture=True
+                )
+        # download iso manually
+        local("wget {}/releases/download/{}/boot2docker.iso -O {}".format(
+            BOOT2DOCKER_REPO, boot2docker_version, CACHED_BOOT2DOCKER
+        ))
+        creation_cmd += " --virtualbox-boot2docker-url {}".format(CACHED_BOOT2DOCKER)
         local(creation_cmd)
         if confirm("Enable port forwarding?"):
             host_port = prompt("Specify host port:", default="8000")
