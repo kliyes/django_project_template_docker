@@ -24,18 +24,16 @@ prefix_default_language == False and settings.LANGUAGE_CODE == "en":
     http://example.com/admin/, will display English admin site
     http://example.com/en/admin/, will raise 404
 """
-from django.conf.urls import url
-from django.conf.urls.i18n import i18n_patterns
+from django.conf import settings
+from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
 
 
-# django translation
-# https://docs.djangoproject.com/en/1.11/topics/i18n/translation/#how-django-discovers-language-preference
-# https://docs.djangoproject.com/en/1.11/topics/i18n/translation/#language-prefix-in-url-patterns
-# for example:
-#
-urlpatterns = i18n_patterns(
-    url(r'^admin/', admin.site.urls),
+admin.site.site_title = getattr(settings, "ADMIN_SITE_TITLE", admin.site.site_title)
+admin.site.site_header = getattr(settings, "ADMIN_SITE_HEADER", admin.site.site_header)
+admin.site.index_title = getattr(settings, "ADMIN_INDEX_TITLE", admin.site.index_title)
 
-    prefix_default_language=False
-)
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

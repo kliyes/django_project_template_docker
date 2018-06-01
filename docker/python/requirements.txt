@@ -1,16 +1,15 @@
 # basic
-ipython==5.3.0
-pillow==4.1.1
-psycopg2==2.7.1
-uwsgi==2.0.15
-fabric==1.13.2
-Werkzeug==0.12
+ipython==5.4
+pillow==5.1.0
+mysql-python==1.2.5
+uwsgi==2.0.17
+fabric==1.14.0
+Werkzeug==0.14.1
 
 # django
 django==1.11
-django-redis==4.7.0
-django-celery==3.1.17
-django-extensions==1.7.8
+django-redis==4.9.0
+django-extensions==2.0.6
 
 # celery
 celery==3.1.23

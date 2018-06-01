@@ -86,11 +86,12 @@ WSGI_APPLICATION = 'wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'project',
+        'USER': 'project',
+        'PASSWORD': 'project',
         'HOST': 'db',
-        'PORT': '5432'
+        'PORT': '3306'
     }
 }
 
@@ -151,6 +152,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "../media")
 
 EMAIL_HOST = 'smtp.gmail.com'
@@ -162,6 +164,10 @@ EMAIL_HOST_PASSWORD = 'ettvelkbozbtvtjh'
 DATE_FORMAT = "Y-m-d"
 TIME_FORMAT = "H:i:s"
 DATETIME_FORMAT = DATE_FORMAT + " " + TIME_FORMAT
+
+ADMIN_SITE_TITLE = u"管理后台"
+ADMIN_SITE_HEADER = u"管理后台"
+ADMIN_INDEX_TITLE = u"管理后台"
 
 # import other settings below
 from .celery import *

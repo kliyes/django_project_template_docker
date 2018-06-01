@@ -1,0 +1,17 @@
+version: '2.1'
+
+services:
+
+  swagger-ui:
+    restart: always
+    image: swaggerapi/swagger-ui
+    hostname: swagger-ui
+    ports:
+      - "8080:8080"
+
+  swagger-editor:
+    restart: always
+    image: swaggerapi/swagger-editor
+    hostname: swagger-editor
+    ports:
+      - "8888:8080"
