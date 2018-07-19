@@ -66,7 +66,7 @@ def check_settings():
     with cd(SETTINGS_DIR):
         init_settings = "__init__.py"
         if not exists(init_settings):
-            run("echo 'from prod import *' >> {}".format(init_settings))
+            run("echo 'from .prod import *' >> {}".format(init_settings))
 
 
 def start_service():
