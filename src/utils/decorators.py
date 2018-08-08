@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
-
-
 def field(label=None, **kwargs):
     """
     A decorator of admin callable-field

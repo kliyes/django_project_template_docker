@@ -1,16 +1,14 @@
 # basic
-ipython==5.4
-pillow==5.1.0
-mysql-python==1.2.5
-uwsgi==2.0.17
-fabric==1.14.0
-Werkzeug==0.14.1
+ipython
+pillow
+mysqlclient
+uwsgi
+Werkzeug
 
 # django
-django==1.11
-django-redis==4.9.0
-django-extensions==2.0.6
+django==2.0.8
+django-redis
+django-extensions
 
 # celery
-celery==3.1.23
 celery[redis]
