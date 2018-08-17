@@ -15,6 +15,6 @@ def field(label=None, **kwargs):
     def inner(func):
         if label is not None:
             func.short_description = label
-        [setattr(func, key, value) for key, value in kwargs.iteritems()]
+        [setattr(func, key, value) for key, value in kwargs.items()]
         return func
     return inner

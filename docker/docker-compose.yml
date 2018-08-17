@@ -49,16 +49,33 @@ services:
     restart: always
     build: ./python
     hostname: celery
-    command: su -m docker -c "celery -A celeryconf:app worker -B --loglevel=INFO"
+    command: su -m docker -c "celery -A celeryconf:app worker --loglevel=INFO"
     volumes_from:
-      - web
+    - web
     working_dir:
       /opt/src
     links:
-      - db
-      - redis
+    - db
+    - redis
     depends_on:
-      - redis
+    - redis
+
+  celery_beat:
+    restart: always
+    build: ./python
+    hostname: celery_beat
+    command: bash -c "celery -A celeryconf:app beat --loglevel=INFO"
+    volumes_from:
+    - web
+    working_dir:
+      /opt/src
+    links:
+    - db
+    - redis
+    - celery
+    depends_on:
+    - redis
+    - celery
 
 volumes:
   redisdata:
