@@ -56,7 +56,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'utils.middleware.ErrorLoggingMiddleware'
 ]
 
 ROOT_URLCONF = 'urls'
@@ -90,7 +91,10 @@ DATABASES = {
         'USER': 'project',
         'PASSWORD': 'project',
         'HOST': 'db',
-        'PORT': '3306'
+        'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8mb4'
+        }
     }
 }
 
@@ -132,7 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/{{ docs_version }}/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -164,9 +168,51 @@ DATE_FORMAT = "Y-m-d"
 TIME_FORMAT = "H:i:s"
 DATETIME_FORMAT = DATE_FORMAT + " " + TIME_FORMAT
 
-ADMIN_SITE_TITLE = u"管理后台"
-ADMIN_SITE_HEADER = u"管理后台"
-ADMIN_INDEX_TITLE = u"管理后台"
+ADMIN_SITE_TITLE = "管理后台"
+ADMIN_SITE_HEADER = "管理后台"
+ADMIN_INDEX_TITLE = "管理后台"
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+        'common': {
+            'format': '%(levelname)s %(asctime)s %(message)s'
+        }
+    },
+    'handlers': {
+        'base_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, '../logging/base.log'),
+            'formatter': 'common'
+        },
+        'error_file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, '../logging/error.log'),
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'base_file': {
+            'handlers': ['base_file'],
+            'level': 'INFO',
+            'propagate': True
+        },
+        'error_file': {
+            'handlers': ['error_file'],
+            'level': 'ERROR',
+            'propagate': True
+        }
+    }
+}
 
 # import other settings below
 from .celery import *

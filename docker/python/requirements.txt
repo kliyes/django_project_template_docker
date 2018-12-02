@@ -4,9 +4,10 @@ pillow
 mysqlclient
 uwsgi
 Werkzeug
+Fabric3
 
 # django
-django==2.0.8
+django==2.1.3
 django-redis
 django-extensions
 
