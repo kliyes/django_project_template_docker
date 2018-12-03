@@ -75,7 +75,7 @@ def check_settings():
         if not os.path.exists(os.path.join(SETTINGS_DIR, init_settings)):
             local("echo 'from .dev import *' >> {}".format(init_settings))
         if not os.path.exists(os.path.join(SETTINGS_DIR, dev_settings)):
-            local("""echo "from .base import *\n\n\nDEBUG=True\nALLOWED_HOSTS = ['*']" >> {}""".format(dev_settings))
+            local("""echo "from .base import *\n\n\nDEBUG = True\nALLOWED_HOSTS = ['*']" >> {}""".format(dev_settings))
 
 
 def start_service():
