@@ -34,7 +34,9 @@ MANAGERS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # override default admin site
+    'apps.AdminConfig',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
