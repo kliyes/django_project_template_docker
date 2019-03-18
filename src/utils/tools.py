@@ -1,7 +1,9 @@
 import cgi
+import os
 import re
 import string
 import random
+import uuid
 
 re_string = re.compile(r'(?P<htmlchars>[<&>])|(?P<space>^[ \t]+)|(?P<lineend>\r\n|\r|\n)|(?P<protocal>(^|\s)((http|ftp|https)://.*?))(\s|$)', re.S|re.M|re.I)
 
@@ -97,3 +99,17 @@ def sizeof_fmt(num, suffix='B'):
             return "%3.1f%s%s" % (num, unit, suffix)
         num /= 1024.0
     return "%.1f%s%s" % (num, 'Y', suffix)
+
+
+def media_upload_to(prefix, filename):
+    """
+    Common media upload to path
+    result like: /prefix/74/743f00b5-4826-48b5-85c1-0a35a269f13f.jpg
+
+    :param prefix: prefix of path
+    :param filename: filename
+    :return: uuid parsed file path with prefix
+    """
+    ext = os.path.splitext(filename)[-1]
+    uuid_filename = str(uuid.uuid4())
+    return f"{prefix}/{uuid_filename[:2]}/{uuid_filename}{ext}"
