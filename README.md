@@ -4,7 +4,7 @@
 
 ## Usage
 ```bash
-$ django-admin startproject --template=https://github.com/kliyes/django_project_template_docker/archive/master.zip [PROJECT NAME]
+$ django-admin startproject --template=https://github.com/kliyes/django_project_template_docker/archive/dj20.zip [PROJECT NAME]
 ```
 ############################
 
