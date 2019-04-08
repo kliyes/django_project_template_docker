@@ -69,6 +69,9 @@ def check_settings():
     """
     检查必要的settings文件
     """
+    with hide("running"):
+        machine_ip = local("docker-machine ip {}".format(MACHINE_NAME), capture=True)
+
     with lcd(SETTINGS_DIR):
         init_settings = "__init__.py"
         dev_settings = "dev.py"
@@ -76,6 +79,9 @@ def check_settings():
             local("echo 'from .dev import *' >> {}".format(init_settings))
         if not os.path.exists(os.path.join(SETTINGS_DIR, dev_settings)):
             local("""echo "from .base import *\n\n\nDEBUG = True\nALLOWED_HOSTS = ['*']" >> {}""".format(dev_settings))
+
+        debug_settings = "debug.py"
+        local("""echo "from .base import *\n\n\nDEBUG = True\nALLOWED_HOSTS = ['*']\n\nDATABASES['default']['HOST'] = '{}'" > {}""".format(machine_ip, debug_settings))
 
 
 def start_service():
