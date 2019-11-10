@@ -1,7 +1,7 @@
-from django.db import models
+from django.db.models import QuerySet
 
 
-class BaseManager(models.Manager):
+class BaseModelQuerySet(QuerySet):
 
     def get_by(self, first=True, *args, **kwargs):
         """
